@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from finance.account.form import AccountForm
 from finance.account.service import add_account, get_accounts_by_user_id, get_account_by_id
 from finance.transaction.forms import TransactionForm
-from finance.transaction.service import add_transaction
+from finance.transaction.service import add_transaction, map_transaction_type_id_to_name
 
 main = Blueprint('Main', __name__)
 
@@ -49,6 +49,7 @@ def dashboard(account_id: int = -1):
         "_account_form": account_form,
         "_transaction_form": transaction_form,
         "accounts": accounts,
+        "t_type_mapper": map_transaction_type_id_to_name(),
         "current_account": current_account
     }
 

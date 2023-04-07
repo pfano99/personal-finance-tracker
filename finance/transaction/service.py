@@ -31,3 +31,8 @@ def get_all_transaction_types() -> list:
 
 def get_transaction_type_by_name(name: str) -> TransactionType:
     return TransactionType.query.filter_by(name=name).first()
+
+
+def map_transaction_type_id_to_name() -> dict:
+    tt = get_all_transaction_types()
+    return {i.id: i.name for i in tt}

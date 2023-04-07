@@ -66,7 +66,7 @@
                                         {{ transaction.name }}
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                        {{ transaction.transaction_type_id }}
+                                        {{ context.t_type_mapper[transaction.transaction_type_id] }}
                                     </p>
                                 </div>
                                 <div class="">
