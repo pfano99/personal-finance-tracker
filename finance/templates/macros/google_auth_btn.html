@@ -1,0 +1,12 @@
+{% macro google_btn(message) %}
+<a href="{{ url_for('Auth.google') }}" class="login-btn" style="text-decoration:none;">
+    <button type="button"
+            class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200 mr-2 mb-2">
+        <img id="google"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
+             alt="Google"
+             style="width:30px;height:30px;">
+        <p class="mx-2">{{ message }}</p>
+    </button>
+</a>
+{% endmacro %}

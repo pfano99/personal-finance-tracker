@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% from './macros/user_info_form.html' import user_info_forms %}
+
+{% block body %}
+
+<div class="flex flex-col items-center justify-center px-6 py-4 mx-auto lg:py-0">
+    <div class="grid grid-flow-col auto-cols-max my-4">
+        <div>
+            <img class="rounded-full h-40" src="../../static/images/main.jpg" alt="image description">
+        </div>
+        <div class="flex items-center">
+            <div class="grid grid-flow-row mx-4 auto-rows-max">
+                <h1 class="text-lg font-semibold">{{ current_user.first_name }}</h1>
+                <h1>{{ current_user.last_name }}</h1>
+                <h1>{{ current_user.email }}</h1>
+            </div>
+        </div>
+    </div>
+    {{ user_info_forms(form, "Update Profile", "update", current_user) }}
+</div>
+
+
+{% endblock body %}

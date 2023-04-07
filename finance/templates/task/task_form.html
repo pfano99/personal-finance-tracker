@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<section class="bg-gray-50">
+    <div class="flex justify-center px-6 py-4 mx-auto">
+        <div class=" w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-xl font-bold text-center leading-tight tracking-tight text-gray-900 md:text-2xl">
+                    Add Task
+                </h1>
+                <form action="" method="post" class="space-y-4 md:space-y-6" action="#">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.project.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ form.project(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
+                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder="project
+                        name")
+                        }}
+                    </div>
+                    <div>
+                        {{ form.name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ form.name(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
+                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder="example task")
+                        }}
+                    </div>
+                    <div>
+                        {{ form.status.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ form.status(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm
+                        rounded-lg
+                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder="example
+                        task")
+                        }}
+                    </div>
+                    <div>
+                        {{ form.finish_by.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ form.finish_by(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm
+                        rounded-lg
+                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder="example
+                        task")
+                        }}
+                    </div>
+                    <div>
+                        {{ form.description.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ form.description(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm
+                        rounded-lg
+                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder="some task
+                        description")
+                        }}
+                    </div>
+                    {{ form.submit(class="w-full text-white bg-gray-600 hover:bg-gray-900 focus:ring-4
+                    focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5
+                    text-center")
+                    }}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

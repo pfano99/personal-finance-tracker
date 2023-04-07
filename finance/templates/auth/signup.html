@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% from './macros/user_info_form.html' import user_info_forms %}
+
+{% block body %}
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    {{ user_info_forms(form,"create an account", "create account", current_user) }}
+</div>
+{% endblock body %}

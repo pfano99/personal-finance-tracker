@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="h-full">
+    <div class="container pt-24 md:pt-36 md:h-100 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+            <h1 class="my-4 text-3xl pl-2 md:text-5xl text-gray-900 opacity-75 font-bold leading-tight text-center md:text-left">
+                Simple
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-700 via-gray-500 to-gray-900">
+              Task Manager
+            </span>
+                using python and flask
+            </h1>
+            <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left ml-4">
+                Sub-hero message, not too long and not too short. Make it just right!
+            </p>
+            <div class="ml-4">
+                <button type="button"
+                        class="focus:outline-none text-white bg-gray-700 hover:bg-gray-800
+                     focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">
+                    Join Today
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full xl:w-3/5 p-12 overflow-hidden">
+            <img class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6"
+                 src="../static/images/macbook.svg"/>
+        </div>
+    </div>
+</div>
+{% endblock body %}

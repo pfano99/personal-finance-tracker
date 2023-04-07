@@ -1,0 +1,23 @@
+{% macro account_form(form) %}
+<div class="px-6 py-6 lg:px-8">
+    <h3 class="mb-4 text-xl font-bold font-4xl text-gray-900 text-center">Add Account</h3>
+
+    <form class="space-y-6" action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+            {{ form.name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+            focus:border-blue-500 block w-full p-2.5") }}
+        </div>
+        <div>
+            {{ form.balance.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+            {{ form.balance(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+            focus:ring-blue-500
+            focus:border-blue-500 block w-full p-2.5") }}
+        </div>
+        {{ form.submit(class="w-full text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none
+        focus:ring-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center") }}
+    </form>
+</div>
+
+{% endmacro %}
