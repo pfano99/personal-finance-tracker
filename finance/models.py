@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
     accounts = db.relationship('Account', backref='user', lazy=True, cascade="all, delete-orphan")
+    budgets = db.relationship('Budget', backref='user', lazy=True, cascade="all, delete-orphan")
 
     def __repr__(self):
         return "User( id: {}, first-name: {}, last-name: {}, email: {})".format(
@@ -64,3 +65,36 @@ class TransactionType(db.Model):
 
     def __repr__(self) -> str:
         return "Transaction-Type( id: {}, name: {} )".format(self.id, self.name)
+
+
+class Budget(db.Model):
+    __tablename__ = "budget"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    budget_items = db.relationship("BudgetItem", lazy=True, backref="budget", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return "Budget ( id: {}, name: {} )".format(self.id, self.name)
+
+    @property
+    def total_cost(self) -> int:
+        res = 0
+        for item in self.budget_items:
+            res += item.price * item.items_count
+        return res
+
+
+class BudgetItem(db.Model):
+    __tablename__ = "budget_item"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    price = db.Column(db.Double, nullable=False)
+    items_count = db.Column(db.Integer, nullable=False, default=1)  # rename to quantity
+    budget_id = db.Column(db.Integer, db.ForeignKey("budget.id"))
+
+    def __repr__(self):
+        return "BudgetItem ( id: {}, name: {}, price: {}, item-count: {} )".format(
+            self.id, self.name, self.price, self.items_count)

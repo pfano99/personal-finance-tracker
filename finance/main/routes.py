@@ -43,7 +43,7 @@ def dashboard(account_id: int = -1):
     if account_id != -1:
         current_account = get_account_by_id(account_id)
     else:
-        current_account = accounts[0]
+        current_account = accounts[0] if accounts.count() > 0 else None
 
     context = {
         "_account_form": account_form,

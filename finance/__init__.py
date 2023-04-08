@@ -1,10 +1,8 @@
-import os, secrets
-
+from authlib.integrations.flask_client import OAuth
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from authlib.integrations.flask_client import OAuth
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -23,11 +21,13 @@ from finance.auth.routes import auth
 from finance.user.routes import user
 from finance.transaction.routes import transaction
 from finance.account.routes import account
+from finance.budget.routes import budget
 
 app.register_blueprint(main)
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(user, url_prefix="/user")
 app.register_blueprint(transaction, url_prefix="/transaction")
 app.register_blueprint(account, url_prefix="/account")
+app.register_blueprint(budget, url_prefix="/budget")
 
 from finance.models import *
