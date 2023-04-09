@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="md:flex md:justify-center md:mx-auto sm:w-full">
+    <div class="sm:w-full md:w-8/12 my-8 p-4 rounded-lg shadow-lg bg-white">
+        <div class="flex justify-between font-bold p-3 border rounded shadow-sm">
+            <p><span class="text-green-400">R550.00</span> (5%)</p>
+            <p>R4500.67</p>
+        </div>
+        <div class="bg-gray-100 mt-2 rounded shadow border p-4">
+            <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
+                {% for stock in range(8) %}
+                <div class="bg-white border shadow p-2 border-rose-500 rounded-lg">
+                    <div class="grid grid-cols-3 gap-1">
+                        <div class="flex justify-center">
+                            <img class="w-10 h-10 rounded-full"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAUVBMVEX///9mZmZeXl5iYmJXV1daWlqlpaXBwcH8/Py0tLRubm6rq6vw8PCIiIiBgYHc3Nz29vbQ0NCfn590dHTj4+OQkJDq6upSUlKWlpbHx8e6urpx1ZffAAABmElEQVRIib2W65KDIAyFIQQvULRg1db3f9AFu91tazTQmd38ZOabE5KTgBB/GX3dfECdg9bzuZyrUUkJ5YoVyhimmLM6cepayvlVT2pfyDVq5coztbByWCoo7noQSrnLekNwpZy4pUz1WMyJBUHLupwTfbD5ZTnVYXTXZfo5aHrrBjM42x9hF4egYgAae0kHfgQNqZvqMGuL3x1PxURTBaV/D2Kdup0hcVq+hFLy7UCeKG4EyYUyxHy1muViDtsSTchz4AhB934hQo8y3zTzguR0WV4QSQsYPtGO4k58aYA0jud7gRMF1nzzgeJEy4PyU5BedRmg+hREcqZyikOukZ5vhyLXXYYBdhrJW3XHcxlTJXVLgEuGAyQSds1ZAJGstiQ/VynAbJqS49ZEbl71c1au1Bq4ZtSVtHpWefSN6MiYI0lwObYjBTMKS5suxsAki+RjlZI9Hi6kE03hj6657f3zNZ9JBc9PK+xd8B4WHxAOwYYOH485w6VfUdSBuavvhWh8iN8HgJmYiw0aKv/ygPaLbcm18b/xBf8tD08u8Xy+AAAAAElFTkSuQmCC"
+                                 alt="Rounded avatar">
+                        </div>
+                        <div class="text-center border-x ">
+                            <p class="p-0 m-0">Apple</p>
+                            <p class="p-0 m-0 text-xs">appl</p>
+                        </div>
+                        <div class="text-end">
+                            <p class="p-0 m-0">R550080.90</p>
+                            <p class="text-end p-0 m-0 text-xs">R-240 | 5%</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
