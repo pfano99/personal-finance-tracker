@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from finance.budget.forms import BudgetForm, BudgetItemForm
 from finance.budget.service import get_budget_by_id, get_budgets_by_user_id, add_budget, add_budget_item
@@ -9,6 +9,7 @@ budget = Blueprint("Budget", __name__)
 
 @budget.route("/")
 @budget.route("/<int:budget_id>")
+@login_required
 def get_budget(budget_id: int = -1):
     if budget_id != -1:
         current_budget = get_budget_by_id(budget_id)
@@ -27,6 +28,7 @@ def get_budget(budget_id: int = -1):
 
 
 @budget.route("/add", methods=['POST'])
+@login_required
 def post_add_budget():
     form = BudgetForm()
     if form.validate_on_submit():
@@ -35,6 +37,7 @@ def post_add_budget():
 
 
 @budget.route("/item/add", methods=['POST'])
+@login_required
 def post_add_budget_item():
     form = BudgetItemForm()
     if form.validate_on_submit():
@@ -45,5 +48,6 @@ def post_add_budget_item():
 
 
 @budget.route("/update", methods=['PUT'])
+@login_required
 def put_update_budget():
     pass

@@ -32,4 +32,5 @@ app.register_blueprint(account, url_prefix="/account")
 app.register_blueprint(budget, url_prefix="/budget")
 app.register_blueprint(market, url_prefix="/market")
 
+
 from finance.models import *

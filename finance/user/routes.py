@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request
+from flask_login import login_required
+
 from finance.models import User
 from finance.auth.form import SignUpForm
 
@@ -6,6 +8,7 @@ user = Blueprint("User", __name__)
 
 
 @user.route("/profile/<int:user_id>", methods=['GET', 'POST'])
+@login_required
 def user_profile(user_id: int):
     user = User.query.get(user_id)
     form = SignUpForm()

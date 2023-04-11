@@ -4,31 +4,99 @@
 
 <div class="md:flex md:justify-center md:mx-auto sm:w-full">
     <div class="sm:w-full md:w-8/12 my-8 p-4 rounded-lg shadow-lg bg-white">
-        <div class="flex justify-between font-bold p-3 border rounded shadow-sm">
-            <p><span class="text-green-400">R550.00</span> (5%)</p>
-            <p>R4500.67</p>
+        <div class="grid grid-cols-12 gap-4">
+            <div class="overflow-x-auto col-span-10">
+                <div class="flex justify-between font-bold p-2 border rounded shadow-sm">
+                    <p><span class="text-green-400">R550.00</span> (5%)</p>
+                    <i class="bi bi-caret-up"></i>
+                    <p>R4500.67</p>
+                </div>
+            </div>
+            <div class="col-span-2">
+                <button data-modal-target="account-modal" data-modal-toggle="account-modal"
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-primary-300 font-medium
+                    rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
+                    Add Stock
+                </button>
+            </div>
         </div>
+
         <div class="bg-gray-100 mt-2 rounded shadow border p-4">
             <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
-                {% for stock in range(8) %}
-                <div class="bg-white border shadow p-2 border-rose-500 rounded-lg">
+                {% for stock in context.stocks %}
+                <div class="bg-white border shadow p-2 {{ 'border-rose-500' if stock.perc < 0 else 'border-green-500' }} rounded-lg">
                     <div class="grid grid-cols-3 gap-1">
                         <div class="flex justify-center">
-                            <img class="w-10 h-10 rounded-full"
-                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAUVBMVEX///9mZmZeXl5iYmJXV1daWlqlpaXBwcH8/Py0tLRubm6rq6vw8PCIiIiBgYHc3Nz29vbQ0NCfn590dHTj4+OQkJDq6upSUlKWlpbHx8e6urpx1ZffAAABmElEQVRIib2W65KDIAyFIQQvULRg1db3f9AFu91tazTQmd38ZOabE5KTgBB/GX3dfECdg9bzuZyrUUkJ5YoVyhimmLM6cepayvlVT2pfyDVq5coztbByWCoo7noQSrnLekNwpZy4pUz1WMyJBUHLupwTfbD5ZTnVYXTXZfo5aHrrBjM42x9hF4egYgAae0kHfgQNqZvqMGuL3x1PxURTBaV/D2Kdup0hcVq+hFLy7UCeKG4EyYUyxHy1muViDtsSTchz4AhB934hQo8y3zTzguR0WV4QSQsYPtGO4k58aYA0jud7gRMF1nzzgeJEy4PyU5BedRmg+hREcqZyikOukZ5vhyLXXYYBdhrJW3XHcxlTJXVLgEuGAyQSds1ZAJGstiQ/VynAbJqS49ZEbl71c1au1Bq4ZtSVtHpWefSN6MiYI0lwObYjBTMKS5suxsAki+RjlZI9Hi6kE03hj6657f3zNZ9JBc9PK+xd8B4WHxAOwYYOH485w6VfUdSBuavvhWh8iN8HgJmYiw0aKv/ygPaLbcm18b/xBf8tD08u8Xy+AAAAAElFTkSuQmCC"
-                                 alt="Rounded avatar">
+                            {% if stock.perc > 0 %}
+                            <span class="flex justify items-center rounded bg-green-300 text-white font-bold mr-2 px-2.5 py-0.5">
+                                <i class="text-xl bi bi-arrow-up"></i>
+                            </span>
+                            {% else %}
+                            <span class="flex justify items-center rounded bg-rose-500 text-white font-bold mr-2 px-2.5 py-0.5">
+                                <i class="text-xl bi bi-arrow-down"></i>
+                            </span>
+                            {% endif %}
                         </div>
                         <div class="text-center border-x ">
-                            <p class="p-0 m-0">Apple</p>
-                            <p class="p-0 m-0 text-xs">appl</p>
+                            <p class="p-0 m-0 font-bold text-gray-600">{{ stock.name[:10] }}</p>
+                            <p class="p-0 m-0 text-xs">{{ stock.ticker }}</p>
                         </div>
                         <div class="text-end">
-                            <p class="p-0 m-0">R550080.90</p>
-                            <p class="text-end p-0 m-0 text-xs">R-240 | 5%</p>
+                            <p class="p-0 m-0">{{ "%.2f"|format(stock.perc_price) }} {{ stock.currency }}</p>
+                            <p class="text-end p-0 m-0 text-xs">{{ "%.2f"|format(stock.perc_price_diff) }} | {{ "%.2f"|format(stock.perc) }}%</p>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div id="account-modal" tabindex="-1" aria-hidden="true"
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto
+     md:inset-0 h-[calc(100%-1rem)] md:h-full">
+    <div class="relative w-full h-full max-w-md md:h-auto">
+        <div class="relative bg-white rounded-lg shadow">
+            <button type="button"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200
+                     hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                    data-modal-hide="account-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-bold font-4xl text-gray-900 text-center">Add Stock</h3>
+
+                <form class="space-y-6" action="/market/add" method="POST">
+                    {{ context.form.hidden_tag() }}
+                    <div>
+                        {{ context.form.ticker.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ context.form.ticker(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                        focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5") }}
+                    </div>
+                    <div>
+                        {{ context.form.bought_at.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ context.form.bought_at(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                        rounded-lg
+                        focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5") }}
+                    </div>
+                    <div>
+                        {{ context.form.amount.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+                        {{ context.form.amount(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                        focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5") }}
+                    </div>
+                    {{ context.form.submit(class="w-full text-white bg-gray-600 hover:bg-gray-800 focus:ring-4
+                    focus:outline-none
+                    focus:ring-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center") }}
+                </form>
             </div>
         </div>
     </div>

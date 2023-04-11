@@ -98,3 +98,17 @@ class BudgetItem(db.Model):
     def __repr__(self):
         return "BudgetItem ( id: {}, name: {}, price: {}, item-count: {} )".format(
             self.id, self.name, self.price, self.items_count)
+
+
+class Stock(db.Model):
+    __tablename__ = "stock"
+    id = db.Column(db.Integer, primary_key=True)
+    ticker = db.Column(db.String(15), nullable=False)
+    bought_at = db.Column(db.Double, nullable=False)
+    amount = db.Column(db.Double, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    def __repr__(self):
+        return "Sock( id: {}, ticker: {}, bought_at: {}, amount: {}".format(
+            self.id, self.ticker, self.bought_at, self.amount
+        )
